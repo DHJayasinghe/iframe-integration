@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { SafePipe } from './pipes/safe.pipe';
 import { DashboardComponent } from './tabs/dashboard/dashboard.component';
+import { MaintenanceLegacyComponent } from './tabs/maintenance-legacy/maintenance-legacy.component';
 import { MaintenanceComponent } from './tabs/maintenance/maintenance.component';
 import { ManagementComponent } from './tabs/management/management.component';
 
@@ -14,12 +15,16 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'management',
+    component: ManagementComponent,
+  },
+  {
     path: 'maintenance',
     component: MaintenanceComponent,
   },
   {
-    path: 'management',
-    component: ManagementComponent,
+    path: 'maintenance/legacy',
+    component: MaintenanceLegacyComponent,
   },
 ];
 
@@ -29,6 +34,7 @@ const routes: Routes = [
     DashboardComponent,
     MaintenanceComponent,
     ManagementComponent,
+    MaintenanceLegacyComponent
   ],
   imports: [CommonModule, RouterModule.forRoot(routes)],
   exports: [RouterModule],

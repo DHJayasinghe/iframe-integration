@@ -14,14 +14,21 @@ export class MaintenanceComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
+    // STEP1: Authentication, this is to call from a secure Backend API
+    // externalRef for uname: 'chathurangajrcsoftwarepm@yahoo.com' is 'externaluserref'
     this.doAuthenticationRequestToBnA(
-      'chathurangajrcsoftwarepm@yahoo.com',
+      'externaluserref',
       'Jrc@1234',
-      '62b09e58-cccc-4bd2-8f4b-05dabb5c40da'
+      '62b09e58-cccc-4bd2-8f4b-05dabb5c40da',
+      'externalorganizationId'
     ).subscribe((authResponse) =>
-      this.doSessionStoreRequestToBnA(authResponse).subscribe((r) => {
+      // STEP2: Store Session: this is also to call from a secure Backend API
+      this.doSessionStoreRequestToBnA(authResponse).subscribe((response) => {
         this.loading = false;
-        this.integrationUrl = 'http://localhost:4200/sign-in?otp=' + r.otp;
+
+        // getting this response.sessionId to front-end on page load, and passing it to iframe is the real deal !!!
+        this.integrationUrl =
+          'http://localhost:4200/sign-in?sessionId=' + response.sessionId;
       })
     );
   }
@@ -29,7 +36,8 @@ export class MaintenanceComponent implements OnInit {
   private doAuthenticationRequestToBnA(
     username: string,
     password: string,
-    client_id: string
+    client_id: string,
+    organizationRef: string
   ) {
     var headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +46,8 @@ export class MaintenanceComponent implements OnInit {
       .set('grant_type', 'password')
       .set('username', username)
       .set('password', password)
-      .set('client_id', client_id);
+      .set('client_id', client_id)
+      .set('external_organization_ref', organizationRef);
 
     return this.httpClient
       .post<AuthenticationResponse>(
@@ -59,7 +68,7 @@ export class MaintenanceComponent implements OnInit {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + authResponse.access_token,
     });
-    return this.httpClient.post<{ otp: number }>(
+    return this.httpClient.post<{ sessionId: number }>(
       environment.bnaIdpUrl + '/session',
       {
         client_id: authResponse.client_id,
