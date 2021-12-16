@@ -1,0 +1,7 @@
+<p>
+  ifcom-integration works!
+</p>
+<button (click)="sendLoginRequest()">Send Login</button>
+<div style="width: 100%;">
+  <iframe id="iframe" #iframe [src]="integrationUrl | safe" style="width: 100%; height:80vh;"></iframe>
+</div>
