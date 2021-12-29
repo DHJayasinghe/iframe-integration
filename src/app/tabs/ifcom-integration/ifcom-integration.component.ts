@@ -15,9 +15,6 @@ import { IFCom } from 'ifcom';
 export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
   public integrationUrl = '';
 
-  private organizationId = 'externalorganizationId';
-  private externalRef = '37453'; // smithandjacksonproperty@gmail.com
-
   @ViewChild('iframe', { static: false }) iframe: ElementRef;
   private ifcom: IFCom;
 
@@ -45,7 +42,6 @@ export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
   }
 
   public sendLoginRequest() {
-    console.log('i have called');
     this.ifcom
       .post({
         context: {

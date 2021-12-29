@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SafePipe } from './pipes/safe.pipe';
 import { DashboardComponent } from './tabs/dashboard/dashboard.component';
+import { IfcomIntegrationExistingComponent } from './tabs/ifcom-integration-existing/ifcom-integration-existing.component';
 import { IfcomIntegrationComponent } from './tabs/ifcom-integration/ifcom-integration.component';
 import { MaintenanceLegacyComponent } from './tabs/maintenance-legacy/maintenance-legacy.component';
 import { MaintenanceComponent } from './tabs/maintenance/maintenance.component';
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'maintenance/legacy/ifcom',
     component: IfcomIntegrationComponent,
+  },
+  {
+    path: 'maintenance/legacy/ifcom/existing',
+    component: IfcomIntegrationExistingComponent,
   },
 ];
 
