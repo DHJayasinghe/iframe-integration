@@ -35,7 +35,7 @@ export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
         if (event.origin !== 'http://localhost:4200') return;
 
         console.log('Acknowledged back to origin: ');
-        console.log(event.data);
+        // console.log(event.data);
         // // ...
       },
       false
@@ -43,8 +43,9 @@ export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
   }
 
   public sendLoginRequest() {
-    const request = this.getNewUser(this.userId);
-    console.log(request.access_token);
+    const request = this.getNewUser(Number(this.userId));
+    // console.log(request.access_token);
+    // console.log(this.getSubject(request.access_token));
     this.ifcom
       .post({
         context: request,
@@ -135,5 +136,12 @@ export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkNGVjMjMyOS02NGM4LTQ0MzctYjkxMi1iNzk0Mjc1NTJmNGIiLCJuYW1lIjoiSm9obiBEb2UifQ.K448ue7dvkBPvR4B9Q3VFUUbrtlak05Qwzllp4Wws6I',
       };
     }
+  }
+
+  private getSubject(token: string) {
+    if (!token) return null;
+    if (token.split('.').length != 3) return null;
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload?.sub;
   }
 }
