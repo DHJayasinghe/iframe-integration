@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SafePipe } from './pipes/safe.pipe';
 import { DashboardComponent } from './tabs/dashboard/dashboard.component';
@@ -46,7 +47,7 @@ const routes: Routes = [
     MaintenanceLegacyComponent,
     IfcomIntegrationComponent,
   ],
-  imports: [CommonModule, RouterModule.forRoot(routes)],
+  imports: [CommonModule, FormsModule, RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
