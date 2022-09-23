@@ -1,7 +1,18 @@
 <h3>You are looking at BnA hidden iframe integration (Legacy/Ifcom)</h3>
-<input type="text" [(ngModel)]="userId" >
+<input type="text" [(ngModel)]="userId" />
 <button (click)="sendLoginRequest()">Send Login</button>
 <button (click)="sendPropertyRequest()">Send Property Request</button>
-<div style="width: 100%;">
-  <iframe id="iframe" #iframe [src]="integrationUrl | safe" style="width: 100%; height:80vh;"></iframe>
+<script type="text/javascript">
+  alert('hi');
+  document.getElementById("iframe").onload = function () {
+    console.log("I have called");
+  };
+</script>
+<div style="width: 100%">
+  <iframe
+    id="iframe"
+    #iframe
+    [src]="integrationUrl | safe"
+    style="width: 100%; height: 80vh"
+  ></iframe>
 </div>

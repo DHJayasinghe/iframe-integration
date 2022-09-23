@@ -1,16 +1,52 @@
 <div>
-  <div style="width:20%; display: inline-block; border-right: 1px solid #ddd; height: 100vh; vertical-align: top;">
+  <div
+    style="
+      width: 20%;
+      display: inline-block;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      vertical-align: top;
+    "
+  >
     <ul>
-      <li style="padding: 5px;"><a [routerLink]="['/dashboard']">Dashboard</a></li>
-      <li style="padding: 5px;"><a [routerLink]="['/management']">Management</a></li>
-      <li style="padding: 5px;"><a [routerLink]="['/maintenance']">Maintenance (New)</a></li>
-      <li style="padding: 5px;"><a [routerLink]="['/maintenance/legacy']">Maintenance (Legacy)</a></li>
-      <li style="padding: 5px;"><a [routerLink]="['/maintenance/legacy/ifcom']">Maintenance (Legacy/Ifcom)</a></li>
-      <li style="padding: 5px;"><a [routerLink]="['/maintenance/legacy/ifcom/existing']">Maintenance
-          (Legacy/Ifcom/Existing)</a></li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/management']">Management</a>
+      </li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/maintenance']">Maintenance (New)</a>
+      </li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/maintenance/legacy']">Maintenance (Legacy)</a>
+      </li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/maintenance/legacy/ifcom']"
+          >Maintenance (Legacy/Ifcom)</a
+        >
+      </li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/maintenance/legacy/ifcom/existing']"
+          >Maintenance (Legacy/Ifcom/Existing)</a
+        >
+      </li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/user-impersonation']">User Impersonation</a>
+      </li>
+      <li style="padding: 5px">
+        <a [routerLink]="['/custom-sso']">Custom SSO</a>
+      </li>
     </ul>
   </div>
-  <div style="width: 70%; display: inline-block; padding: 15px 25px; vertical-align: top;">
+  <div
+    style="
+      width: 70%;
+      display: inline-block;
+      padding: 15px 25px;
+      vertical-align: top;
+    "
+  >
     <router-outlet></router-outlet>
   </div>
 </div>

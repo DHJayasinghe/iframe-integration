@@ -1,0 +1,11 @@
+user-impersonation works!
+<br>
+<br>
+<a href="http://localhost:4200/sign-in?act-as={{ userId }}&organization-id={{organizationId}}" target="_blank">Impersonate Sample User</a>
+<br />
+<br />
+UserId:
+<input type="text" [(ngModel)]="userId" style="width: 100%; max-width: 300px; height: 30px;"/>
+<br>
+OrganizationId:
+<input type="text" [(ngModel)]="organizationId" style="width: 100%; max-width: 300px; height: 30px;"/>

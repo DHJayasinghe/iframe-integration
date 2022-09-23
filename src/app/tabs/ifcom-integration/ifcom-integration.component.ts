@@ -22,17 +22,25 @@ export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit() {
-    this.integrationUrl = `http://localhost:4200/sign-in`;
+    this.integrationUrl = `http://localhost:4200`;
   }
 
   ngAfterViewInit() {
     const nativeEl = this.iframe.nativeElement;
     this.ifcom = new IFCom({ subject: nativeEl });
+    // this.sendLoginRequest();
 
     window.addEventListener(
       'message',
       (event) => {
-        if (event.origin !== 'http://localhost:4200') return;
+        if (
+          ![
+            'http://localhost:4200',
+            'http://localhost:4300',
+            'https://localhost:44354',
+          ].some((origin) => origin === event.origin)
+        )
+          return;
 
         console.log('Acknowledged back to origin: ');
         // console.log(event.data);
@@ -118,10 +126,9 @@ export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
           action: null,
           external_property_id: null,
         },
-        access_token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZWY4MGQ4Yi1jZDg1LTQ5OTYtYWYxYi00NDY5ZTUxOTQ0NWYiLCJuYW1lIjoiSm9obiBEb2UifQ.9XUatEg6JiQn8BEYZOxGX672cETpl6oDrA93kCOM8mo',
+        // access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZWY4MGQ4Yi1jZDg1LTQ5OTYtYWYxYi00NDY5ZTUxOTQ0NWYiLCJuYW1lIjoiSm9obiBEb2UifQ.9XUatEg6JiQn8BEYZOxGX672cETpl6oDrA93kCOM8mo',
       };
-    } else {
+    } else if (option == 2) {
       return {
         session: {
           company: {
@@ -134,6 +141,36 @@ export class IfcomIntegrationComponent implements OnInit, AfterViewInit {
         },
         access_token:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkNGVjMjMyOS02NGM4LTQ0MzctYjkxMi1iNzk0Mjc1NTJmNGIiLCJuYW1lIjoiSm9obiBEb2UifQ.K448ue7dvkBPvR4B9Q3VFUUbrtlak05Qwzllp4Wws6I',
+      };
+    } else if (option == 3) {
+      // for similar user under multiple organization scenario (userid: 0b3d2857-e59f-4231-b9df-b3e42332f4c3,orgId: 8FAA48A4-2C88-455E-83BB-08D7D23697B7 )
+      return {
+        session: {
+          company: {
+            external_company_id: '8FAA48A4-2C88-455E-83BB-08D7D23697B7',
+          },
+        },
+        parameters: {
+          action: null,
+          external_property_id: null,
+        },
+        access_token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjNkMjg1Ny1lNTlmLTQyMzEtYjlkZi1iM2U0MjMzMmY0YzMiLCJuYW1lIjoiSm9obiBEb2UifQ.qfv0dr7poxAFThLdTZtGjAjltUWC0ack6A6MEjXQl3w',
+      };
+    } else if (option == 4) {
+      // (userid: 0b3d2857-e59f-4231-b9df-b3e42332f4c3,orgId: C0DE833A-57DE-40C3-B341-DA8A315FEC27 )
+      return {
+        session: {
+          company: {
+            external_company_id: 'vaultrestgdemoorg',
+          },
+        },
+        parameters: {
+          action: null,
+          external_property_id: null,
+        },
+        access_token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMjMzOCIsIm5hbWUiOiJKb2huIERvZSJ9.aAlGTAVjW8hFPSbiKgZpzVcL_-igjzaOUSzxdsXDql0',
       };
     }
   }
